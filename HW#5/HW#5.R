@@ -1,0 +1,15 @@
+data("biopsy")
+dim(biopsy)
+head(biopsy)
+SF<-subset(biopsy, select=-c(ID))
+head(SF)
+SF1<-na.omit(SF)
+head(SF1)
+SF2<-randomForest(class ~., data=SF1, importance=T)
+print(SF2)
+SF5<-varImpPlot(SF2, pch=16, col="red", n.var=, sort=T, main="Importance of variable for the Cancer data")
+SF5
+SF3<-randomForest(class~V1+V2+V3+V5+V6+V7, data=SF1, importance=T)
+print(SF3)
+SF4<-varImpPlot(SF3, col="red", n.var=6, sort=T, main="Importance of selected variables for the cancer data")
+SF4
